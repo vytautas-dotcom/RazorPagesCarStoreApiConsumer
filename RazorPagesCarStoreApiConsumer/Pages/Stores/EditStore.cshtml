@@ -1,0 +1,39 @@
+﻿@page
+@model RazorPagesCarStoreApiConsumer.Pages.Stores.EditStoreModel
+@{
+    ViewData["Title"] = "Edit Store";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Store.Id" />
+            <input type="hidden" asp-for="Store.CarList" />
+            <div class="form-group">
+                <label asp-for="Store.City" class="control-label"></label>
+                <input asp-for="Store.City" class="form-control" />
+                <span asp-validation-for="Store.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Description" class="control-label"></label>
+                <input asp-for="Store.Description" class="form-control" />
+                <span asp-validation-for="Store.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="storelist">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

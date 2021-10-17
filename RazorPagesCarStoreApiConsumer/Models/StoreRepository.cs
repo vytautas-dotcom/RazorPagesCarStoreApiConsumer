@@ -42,5 +42,49 @@ namespace RazorPagesCarStoreApiConsumer.Models
                 }
             }
         }
+        public async Task<Store> UpdateStore(Guid storeId, Store store = null)
+        {
+            if (store == null)
+            {
+                List<Store> storeList = new List<Store>();
+                using (var httpClient = new HttpClient())
+                {
+                    using (var response = await httpClient.GetAsync("https://localhost:44372/stores/"))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        storeList = JsonConvert.DeserializeObject<List<Store>>(apiResponse);
+                    }
+                }
+                var storeForEdit = (from stores in storeList where stores.Id == storeId select stores).First();
+
+                return storeForEdit;
+            }
+            else
+            {
+                if (store.CarList.Count == 0)
+                    store.CarList = new List<Car>();
+
+                using (var httpClient = new HttpClient())
+                {
+                    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(store),
+                                                                    encoding: Encoding.UTF8,
+                                                                    mediaType: "application/json");
+                    using (var response = await httpClient.PutAsync("https://localhost:44372/stores/", stringContent))
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public async Task DeleteStore(Guid storeId)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync("https://localhost:44372/stores/"+storeId))
+                {
+                }
+            }
+        }
     }
 }

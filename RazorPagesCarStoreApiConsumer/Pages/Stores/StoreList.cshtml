@@ -7,9 +7,9 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="CreateStore">Create New</a>
+    <a asp-page="CreateStore" class="btn btn-outline-dark">Create New</a>
 </p>
-<table class="table">
+<table class="table align-content-end">
     <thead>
         <tr class="bg-secondary">
             <th>
@@ -21,6 +21,7 @@
             <th>
                 Total cars:
             </th>
+            <th colspan="4"></th>
             <th></th>
             <th></th>
         </tr>
@@ -32,16 +33,22 @@
                 <td class="@item.City">
                     @Html.DisplayFor(modelItem => item.City)
                 </td>
-                <td class="@item.City">
+                <td class="@item.City" colspan="2">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td class="@item.City">
                     @Html.DisplayFor(modelItem => item.CarList.Count)
                 </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <td colspan="3">
+                    <form id="submit" asp-page-handler="delete" asp-route-storeId="@item.Id" method="post">
+                        <a asp-page="./EditStore" asp-route-storeId="@item.Id" class="btn btn-sm btn-outline-success">Edit</a> |
+                        <a asp-page="./StoreDetails" asp-route-storeId="@item.Id" class="btn btn-sm btn-outline-info">Details</a> |
+                        <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete" /> |
+                        <a asp-page="/Cars/AddCar" asp-route-storeId="@item.Id" class="btn btn-sm btn-outline-secondary">Add Car</a>
+                    </form>
+                </td>
+                <td >
+                    
                 </td>
                 <td></td>
             </tr>
@@ -51,6 +58,8 @@
                 <th>Price</th>
                 <th>Remark</th>
                 <th>Sold</th>
+                <th></th>
+                <th></th>
             </tr>
             @foreach (var car in item.CarList)
             {
@@ -60,6 +69,14 @@
                     <td>@car.Price</td>
                     <td>@car.Remark</td>
                     <td>@car.IsInStore</td>
+                    <td>
+                        <form id="submit" asp-page-handler="deleteCar" asp-route-storeId="@item.Id" asp-route-carId="@car.Id" method="post">
+                            <a asp-page="/Cars/EditCar" asp-route-storeId="@item.Id" asp-route-carId="@car.Id" class="btn btn-sm btn-outline-success">Edit</a> |
+                            <a asp-page="/Cars/CarDetails" asp-route-storeId="@item.Id" asp-route-carId="@car.Id" class="btn btn-sm btn-outline-info">Details</a> |
+                            <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete" />
+                        </form>
+                    </td>
+                    <td></td>
                 </tr>
             }
         }

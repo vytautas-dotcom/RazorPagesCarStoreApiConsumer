@@ -9,5 +9,7 @@ namespace RazorPagesCarStoreApiConsumer.Models
     {
         Task<List<Store>> GetStoreList(Guid storeId = default);
         Task AddStore(Store store);
+        Task<Store> UpdateStore(Guid storeId, Store store);
+        Task DeleteStore(Guid storeId);
     }
 }

@@ -8,31 +8,32 @@ using RazorPagesCarStoreApiConsumer.Models;
 
 namespace RazorPagesCarStoreApiConsumer.Pages.Stores
 {
-    public class CreateStoreModel : PageModel
+    public class EditStoreModel : PageModel
     {
         private readonly IStoreRepository _storeRepository;
 
-        public CreateStoreModel(IStoreRepository storeRepository)
+        public EditStoreModel(IStoreRepository storeRepository)
         {
             _storeRepository = storeRepository;
         }
 
         [BindProperty]
         public Store Store { get; set; }
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet(Guid storeId)
         {
+            Store = await _storeRepository.UpdateStore(storeId, null);
             return Page();
         }
+
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            await _storeRepository.AddStore(Store);
+            await _storeRepository.UpdateStore(Store.Id, Store);
+
             return RedirectToPage("./storelist");
         }
-
-        
     }
 }

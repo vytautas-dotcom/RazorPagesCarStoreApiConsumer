@@ -1,0 +1,34 @@
+﻿@page
+@model RazorPagesCarStoreApiConsumer.Pages.Stores.StoreDetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Store.City" class="control-label"></label>
+                <input asp-for="Store.City" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Store.Description" class="control-label"></label>
+                <input asp-for="Store.Description" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Total car</label>
+                <input asp-for="Store.CarList.Count" class="form-control" readonly/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cars sold</label>
+                <input asp-for="sold" class="form-control" readonly/>
+            </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="storelist">Back to List</a>
+</div>
+

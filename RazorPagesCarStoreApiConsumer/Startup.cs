@@ -24,6 +24,7 @@ namespace RazorPagesCarStoreApiConsumer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IStoreRepository, StoreRepository>();
+            services.AddScoped<ICarRepository, CarRepository>();
             services.AddRazorPages();
         }
 

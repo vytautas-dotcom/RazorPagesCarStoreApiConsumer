@@ -1,0 +1,53 @@
+﻿@page
+@model RazorPagesCarStoreApiConsumer.Pages.Cars.AddCarModel
+@{
+    ViewData["Title"] = "Create new car";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" name="storeId" value="@ViewData["StoreId"]"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Car.Name" class="control-label"></label>
+                <input asp-for="Car.Name" class="form-control" />
+                <span asp-validation-for="Car.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.DateRelease" class="control-label"></label>
+                <input asp-for="Car.DateRelease" class="form-control" />
+                <span asp-validation-for="Car.DateRelease" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Price" class="control-label"></label>
+                <input asp-for="Car.Price" class="form-control" />
+                <span asp-validation-for="Car.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Remark" class="control-label"></label>
+                <input asp-for="Car.Remark" class="form-control" />
+                <span asp-validation-for="Car.Remark" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.IsInStore" class="control-label"></label>
+                <input asp-for="Car.IsInStore" class="form-control" />
+                <span asp-validation-for="Car.IsInStore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Stores/StoreList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

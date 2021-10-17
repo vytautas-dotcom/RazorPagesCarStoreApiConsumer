@@ -8,31 +8,24 @@ using RazorPagesCarStoreApiConsumer.Models;
 
 namespace RazorPagesCarStoreApiConsumer.Pages.Stores
 {
-    public class CreateStoreModel : PageModel
+    [BindProperties]
+    public class StoreDetailsModel : PageModel
     {
         private readonly IStoreRepository _storeRepository;
 
-        public CreateStoreModel(IStoreRepository storeRepository)
+        public StoreDetailsModel(IStoreRepository storeRepository)
         {
             _storeRepository = storeRepository;
         }
 
-        [BindProperty]
+        
         public Store Store { get; set; }
-        public IActionResult OnGet()
+        public int sold { get; set; }
+        public async Task<IActionResult> OnGet(Guid storeId)
         {
+            Store = await _storeRepository.UpdateStore(storeId, null);
+            sold = Store.CarList.Count - (from cars in Store.CarList where cars.IsInStore == true select cars).ToList().Count;
             return Page();
         }
-        public async Task<IActionResult> OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            await _storeRepository.AddStore(Store);
-            return RedirectToPage("./storelist");
-        }
-
-        
     }
 }

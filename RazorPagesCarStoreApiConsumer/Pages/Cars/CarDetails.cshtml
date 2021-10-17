@@ -1,0 +1,39 @@
+﻿@page
+@model RazorPagesCarStoreApiConsumer.Pages.Cars.CarDetailsModel
+@{
+    ViewData["Title"] = "Car details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <input type="hidden" name="storeId" value="@ViewData["StoreId"]" />
+        <input type="hidden" asp-for="Car.Id" />
+        <div class="form-group">
+            <label asp-for="Car.Name" class="control-label"></label>
+            <input asp-for="Car.Name" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Car.DateRelease" class="control-label"></label>
+            <input asp-for="Car.DateRelease" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Car.Price" class="control-label"></label>
+            <input asp-for="Car.Price" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Car.Remark" class="control-label"></label>
+            <input asp-for="Car.Remark" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Car.IsInStore" class="control-label"></label>
+            <input asp-for="Car.IsInStore" class="form-control" readonly="readonly" />
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Stores/StoreList">Back to List</a>
+</div>
